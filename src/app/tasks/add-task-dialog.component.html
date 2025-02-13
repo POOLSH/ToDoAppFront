@@ -1,0 +1,32 @@
+<div class="task-dialog">
+  <h2>{{ isEditMode ? 'Редактирование' : 'Добавить задачу' }}</h2>
+  <form (submit)="onSave()" class="task-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <input matInput [(ngModel)]="newTask.title" name="title" placeholder="Название" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <textarea matInput [(ngModel)]="newTask.description" name="description" placeholder="Описание" required></textarea>
+    </mat-form-field>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <input matInput type="date" [(ngModel)]="newTask.dueDate" name="dueDate" placeholder="Дата" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-select [(ngModel)]="newTask.status" name="status" placeholder="Статус" required>
+          <mat-option value="pending">Невыполненное</mat-option>
+          <mat-option value="completed">Выполненное</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="dialog-actions">
+      <button mat-raised-button color="primary" type="submit">
+        {{ isEditMode ? 'Сохранить' : 'Добавить' }}
+      </button>
+      <button mat-button (click)="onCancel()">Отмена</button>
+    </div>
+  </form>
+</div>
