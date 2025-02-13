@@ -1,0 +1,73 @@
+/* Общий стиль для формы */
+form {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+/* Стиль для заголовка */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Стиль для меток */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Стиль для полей ввода */
+input[type="text"],
+input[type="password"] {
+  width: calc(100% - 20px); /* Убираем лишнюю ширину */
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: 0.3s;
+  display: block;
+}
+
+
+/* Контейнер для кнопок */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; /* Добавляет промежуток между кнопками */
+}
+
+/* Чтобы кнопки не растягивались на всю ширину */
+.button-group button {
+  width: auto;
+  flex: 1;
+}
+
+/* Стиль для кнопки */
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Стиль для сообщений об ошибках */
+small {
+  color: red;
+  font-size: 12px;
+}

@@ -1,0 +1,70 @@
+<div>
+  <h3>Task List</h3>
+  <button class="add-task-btn" (click)="toggleAddForm()">
+    {{ showAddForm ? 'Cancel' : 'Add Task' }}
+  </button>
+</div>
+
+<!-- Фильтрация задач -->
+<div class="filters">
+  <input type="text" [(ngModel)]="filterTitle" placeholder="Фильтр по названию" />
+  <input type="date" [(ngModel)]="filterDueDate" placeholder="Фильтр по дате" />
+  <select [(ngModel)]="filterStatus">
+    <option value="">Все</option>
+    <option value="pending">Невыполненное</option>
+    <option value="completed">Выполненное</option>
+  </select>
+  <button (click)="applyFilters()">Применить фильтры</button>
+  <button (click)="clearFilters()">Сбросить</button>
+</div>
+
+<div class="task-grid">
+  <div class="task-card" *ngFor="let task of tasks">
+    <ng-container *ngIf="editingTaskId === task.id; else viewMode">
+      <input type="text" [(ngModel)]="task.title" />
+      <input type="text" [(ngModel)]="task.description" />
+      <input type="date" [(ngModel)]="task.dueDate" />
+      <select [(ngModel)]="task.status">
+        <option value="pending">Невыполненное</option>
+        <option value="completed">Выполненное</option>
+      </select>
+      <button (click)="onUpdate(task)">Сохранить</button>
+      <button (click)="cancelEdit()">Отмена</button>
+    </ng-container>
+
+    <ng-template #viewMode>
+      <h3>{{ task.title }}</h3>
+      <p>{{ task.description }}</p>
+      <p><strong>Дата:</strong> {{ task.dueDate | date }}</p>
+      <p><strong>Статус:</strong> {{ task.status === 'completed' ? '✅' : '❌' }}</p>
+      <button (click)="onEdit(task)">Редактировать</button>
+      <button (click)="onDelete(task.id)">Удалить</button>
+    </ng-template>
+  </div>
+</div>
+
+<div *ngIf="showAddForm">
+  <h3>Add Task</h3>
+  <form (submit)="onAdd()">
+    <div>
+      <label for="title">Title</label>
+      <input type="text" id="title" [(ngModel)]="newTask.title" name="title" required />
+    </div>
+    <div>
+      <label for="description">Description</label>
+      <input type="text" id="description" [(ngModel)]="newTask.description" name="description" required />
+    </div>
+    <div>
+      <label for="dueDate">Дата завершения</label>
+      <input type="date" id="dueDate" [(ngModel)]="newTask.dueDate" name="dueDate" required />
+    </div>
+    <div>
+      <label for="status">Статус</label>
+      <select id="status" [(ngModel)]="newTask.status" name="status" required>
+        <option value="pending">Невыполненное</option>
+        <option value="completed">Выполненное</option>
+      </select>
+    </div>
+    <button type="submit">Add Task</button>
+  </form>
+</div>
