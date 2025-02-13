@@ -7,9 +7,16 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './services/auth.interceptor';
 import {AuthService} from './auth/auth.service';
 import {TaskService} from './tasks/task.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import {SignUpComponent} from './auth/signUp.component';
 import {SignInComponent} from './auth/signIn.component';
 import {JwtModule} from '@auth0/angular-jwt';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -25,11 +32,18 @@ import {JwtModule} from '@auth0/angular-jwt';
     }),
     HttpClientModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatDialogModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor,multi:true},
   AuthService,
-  TaskService],
+  TaskService,
+  provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

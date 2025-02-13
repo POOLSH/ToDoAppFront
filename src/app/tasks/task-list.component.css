@@ -7,48 +7,32 @@
   font-family: Arial, sans-serif;
 }
 
-/* Заголовки таблицы */
-th {
-  background-color: #007bff;
-  color: white;
-  padding: 12px;
-  text-align: left;
-}
 
-/* Четные строки */
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-/* Наведение */
-tr:hover {
-  background-color: #e9ecef;
-}
 
 /* Делаем форму по центру */
 .add-task-form {
   width: 400px;
   margin: 20px auto; /* Центрируем */
   padding: 20px;
-  border: 1px solid #ccc;
+  /*border: 1px solid #ccc;*/
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
+  /*background-color: #f9f9f9;*/
 }
 
 /* Кнопка Add Task */
 .add-task-btn {
-  display: block;
   padding: 10px 15px;
-  margin: 10px 0;
-  background-color: #28a745;
-  color: white;
+  font-size: 14px;
+  /*background-color: #007bff;*/
+  /*color: white;*/
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
-.add-task-btn:hover {
+/*.add-task-btn:hover {
   background-color: #218838;
 }
 
@@ -74,11 +58,11 @@ button:hover {
 /* Delete кнопка */
 .delete-btn {
   background-color: #dc3545;
-  color: white;
+  /*color: white;*/
 }
 
 .delete-btn:hover {
-  background-color: #c82333;
+  /*background-color: #c82333;*/
 }
 
 /* Update/Save кнопка */
@@ -101,6 +85,17 @@ button:hover {
   border-radius: 8px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+  word-wrap: break-word; /* 🔹 Перенос длинных слов */
+  overflow: hidden; /* 🔹 Обрезка лишнего текста */
+  max-width: 100%; /* 🔹 Предотвращаем выход за границы */
+}
+
+.task-card p {
+  margin: 5px 0;
+  white-space: normal; /* 🔹 Позволяет тексту переноситься */
+  overflow-wrap: break-word; /* 🔹 Разрешает перенос слов */
+  word-break: break-word; /* 🔹 Разбивает длинные слова */
+  max-width: 100%; /* 🔹 Ограничивает ширину текста */
 }
 
 .task-card h3 {
@@ -114,3 +109,29 @@ button:hover {
 button {
   margin-right: 5px;
 }
+
+.filters-container {
+  display: flex;
+  align-items: center; /* 🔹 Выравниваем по центру */
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 15px; /* 🔹 Добавляем отступ снизу */
+}
+
+.filters {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.filters mat-form-field {
+  width: 200px; /* 🔹 Немного уже */
+  max-width: 100%;
+  margin-bottom: 5px; /* 🔹 Чуть уменьшаем расстояние между полями */
+}
+
+.filters input, .filters mat-select {
+  font-size: 14px;
+  padding: 5px; /* 🔹 Меньше отступов внутри */
+}
+
