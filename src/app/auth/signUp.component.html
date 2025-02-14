@@ -1,37 +1,41 @@
-<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+
+
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" class="sign-up-form">
   <h2>Регистрация</h2>
 
-  <div>
-    <label for="username">Имя пользователя:</label>
-    <input type="text" id="username" formControlName="username" />
-    <div *ngIf="signUpForm.get('username')?.invalid && signUpForm.get('username')?.touched">
-      <small *ngIf="signUpForm.get('username')?.errors?.required">Имя пользователя обязательно.</small>
-      <small *ngIf="signUpForm.get('username')?.errors?.minlength">Минимум 5 символов.</small>
-      <small *ngIf="signUpForm.get('username')?.errors?.maxlength">Максимум 20 символов.</small>
-    </div>
-  </div>
+  <!-- Имя пользователя -->
+  <mat-form-field appearance="outline" class="full-width">
+    <input matInput type="text" id="username" placeholder="Имя пользователя" formControlName="username" />
+    <mat-error *ngIf="signUpForm.get('username')?.invalid && signUpForm.get('username')?.touched">
+      <span *ngIf="signUpForm.get('username')?.errors?.['required']">Имя пользователя обязательно.</span>
+      <span *ngIf="signUpForm.get('username')?.errors?.['minlength']">Минимум 5 символов.</span>
+      <span *ngIf="signUpForm.get('username')?.errors?.['maxlength']">Максимум 20 символов.</span>
+    </mat-error>
+  </mat-form-field>
 
-  <div>
-    <label for="email">Почта:</label>
-    <input type="email" id="email" formControlName="email" />
-    <div *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
-      <small *ngIf="signUpForm.get('email')?.errors?.required">Электронная почта обязательна.</small>
-      <small *ngIf="signUpForm.get('email')?.errors?.email">Некорректный формат электронной почты.</small>
-    </div>
-  </div>
+  <!-- Почта -->
+  <mat-form-field appearance="outline" class="full-width">
+    <input matInput type="email" id="email" placeholder="Почта" formControlName="email" />
+    <mat-error *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
+      <span *ngIf="signUpForm.get('email')?.errors?.['required']">Электронная почта обязательна.</span>
+      <span *ngIf="signUpForm.get('email')?.errors?.['email']">Некорректный формат электронной почты.</span>
+    </mat-error>
+  </mat-form-field>
 
-  <div>
-    <label for="password">Пароль:</label>
-    <input type="password" id="password" formControlName="password" />
-    <div *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
-      <small *ngIf="signUpForm.get('password')?.errors?.required">Пароль обязателен.</small>
-      <small *ngIf="signUpForm.get('password')?.errors?.minlength">Минимум 8 символов.</small>
-      <small *ngIf="signUpForm.get('password')?.errors?.maxlength">Максимум 255 символов.</small>
-    </div>
-  </div>
+  <!-- Пароль -->
+  <mat-form-field appearance="outline" class="full-width">
+    <input matInput type="password" id="password" placeholder="Пароль" formControlName="password" />
+    <mat-error *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
+      <span *ngIf="signUpForm.get('password')?.errors?.['required']">Пароль обязателен.</span>
+      <span *ngIf="signUpForm.get('password')?.errors?.['minlength']">Минимум 8 символов.</span>
+      <span *ngIf="signUpForm.get('password')?.errors?.['maxlength']">Максимум 255 символов.</span>
+    </mat-error>
+  </mat-form-field>
 
+  <!-- Кнопки -->
   <div class="button-group">
-    <button type="submit" [disabled]="signUpForm.invalid">Зарегистрироваться</button>
-    <button type="button" (click)="goToSignIn()">Вход</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="signUpForm.invalid">Зарегистрироваться</button>
+    <button mat-stroked-button color="accent" type="button" (click)="goToSignIn()">Вход</button>
   </div>
 </form>
+

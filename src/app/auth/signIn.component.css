@@ -1,73 +1,55 @@
-/* Общий стиль для формы */
-form {
-  max-width: 400px;
-  margin: 20px auto;
-  padding: 30px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+/* Центрирование формы */
+.sign-in-form {
+  width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
+  background-color: #fff;
 }
 
-/* Стиль для заголовка */
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
+/* Поля ввода занимают всю ширину */
+.sign-in-form mat-form-field {
+  width: 100%;
 }
-
-/* Стиль для меток */
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-/* Стиль для полей ввода */
-input[type="text"],
-input[type="password"] {
-  width: calc(100% - 20px); /* Убираем лишнюю ширину */
-  padding: 8px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
-  transition: 0.3s;
-  display: block;
-}
-
 
 /* Контейнер для кнопок */
-.button-group {
+.sign-in-form .button-group {
   display: flex;
   justify-content: space-between;
-  gap: 10px; /* Добавляет промежуток между кнопками */
+  margin-top: 15px;
 }
 
-/* Чтобы кнопки не растягивались на всю ширину */
-.button-group button {
-  width: auto;
-  flex: 1;
-}
-
-/* Стиль для кнопки */
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+/* Общий стиль для кнопок */
+.sign-in-form button {
+  padding: 10px 20px;
   font-size: 16px;
-
+  font-weight: bold;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
-button:hover {
-  background-color: #0056b3;
+/* Основная кнопка */
+.sign-in-form button[color="primary"] {
+  background-color: #f9f9f9;
+  color: #007bff;
 }
 
-/* Стиль для сообщений об ошибках */
-small {
-  color: red;
-  font-size: 12px;
+.sign-in-form button[color="primary"]:hover {
+  background-color: #ececec;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+}
+
+/* Кнопка регистрации */
+.sign-in-form button[color="accent"] {
+  background-color: #f9f9f9;
+  color: #007bff;
+}
+
+.sign-in-form button[color="accent"]:hover {
+  background-color: #ececec;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
 }

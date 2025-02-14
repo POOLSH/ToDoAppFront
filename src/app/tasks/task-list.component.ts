@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TaskService } from './task.service';
 import { Task } from './task';
 import { AddTaskDialogComponent } from './add-task-dialog.component';
-import {MatFormField} from '@angular/material/form-field';
+import {MatFormField, MatSuffix} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import {MatOption, MatSelect} from '@angular/material/select';
@@ -12,6 +12,7 @@ import {MatCard} from '@angular/material/card';
 import {DatePipe} from '@angular/common';
 import {CommonModule} from '@angular/common';
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
+
 
 @Component({
   selector: 'app-task-list',
@@ -28,7 +29,8 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/m
     CommonModule,
     MatDatepickerInput,
     MatDatepickerToggle,
-    MatDatepicker
+    MatDatepicker,
+    MatSuffix
   ],
   styleUrls: ['./task-list.component.css']
 })
@@ -39,7 +41,8 @@ export class TaskListComponent implements OnInit {
   // 🔥 Поля для фильтрации
   filterStatus: string = '';
   filterTitle: string = '';
-  filterDueDate: string = '';
+  filterDueDate: Date | null = null;
+  dueDateString:string='';
 
   constructor(private taskService: TaskService, public dialog: MatDialog) {}
 
@@ -49,7 +52,9 @@ export class TaskListComponent implements OnInit {
 
   // 🔥 Метод загрузки задач с фильтрацией
   loadTasks() {
-    this.taskService.getTasks(this.filterStatus, this.filterTitle, this.filterDueDate).subscribe(tasks => {
+    let dueDateString = this.filterDueDate ? this.filterDueDate.toLocaleDateString('sv-SE') : '';
+    console.log("Выбранная дата:", dueDateString);
+    this.taskService.getTasks(this.filterStatus, this.filterTitle, dueDateString).subscribe(tasks => {
       this.tasks = tasks;
     });
   }
@@ -105,6 +110,7 @@ export class TaskListComponent implements OnInit {
 
   // 🔥 Метод для фильтрации
   applyFilters() {
+    console.log("Выбранная дата:", this.filterDueDate);
     this.loadTasks();
   }
 
@@ -112,7 +118,8 @@ export class TaskListComponent implements OnInit {
   clearFilters() {
     this.filterStatus = '';
     this.filterTitle = '';
-    this.filterDueDate = '';
+    this.filterDueDate = null;
+    this.dueDateString = '';
     this.loadTasks();
   }
 }

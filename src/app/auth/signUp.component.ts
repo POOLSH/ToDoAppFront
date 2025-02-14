@@ -3,13 +3,20 @@ import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {JwtModule} from '@auth0/angular-jwt';
+import {MatFormField, MatFormFieldModule} from '@angular/material/form-field';
+import {MatButton, MatButtonModule} from '@angular/material/button';
+import {MatInput, MatInputModule} from '@angular/material/input';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-signUp',
   imports: [
-
+    CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
   templateUrl: './signUp.component.html',
   styleUrls: ['./signUp.component.css']

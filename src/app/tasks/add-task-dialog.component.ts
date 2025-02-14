@@ -1,12 +1,13 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatFormField } from '@angular/material/form-field';
+import {MatFormField, MatSuffix} from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatButton } from '@angular/material/button';
 import { TaskService } from './task.service';
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
+import {CdkTextareaAutosize} from '@angular/cdk/text-field';
 
 @Component({
   selector: 'app-add-task-dialog',
@@ -20,7 +21,9 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/m
     MatButton,
     MatDatepickerToggle,
     MatDatepicker,
-    MatDatepickerInput
+    MatDatepickerInput,
+    CdkTextareaAutosize,
+    MatSuffix
   ],
   styleUrls: ['./add-task-dialog.component.css']
 })
@@ -35,7 +38,7 @@ export class AddTaskDialogComponent {
 
 
   isEditMode: boolean = false; // Флаг режима редактирования
-  filterDueDate: string ='';
+  filterDueDate: Date |null=null;
 
   constructor(
     private taskService: TaskService,
@@ -45,13 +48,20 @@ export class AddTaskDialogComponent {
     if (data?.task) {
       this.isEditMode = true;
       this.newTask = { ...data.task }; // Заполняем данные для редактирования
+      this.newTask.dueDate = data.task.dueDate ? this.formatDate(new Date(data.task.dueDate)) : '';
     }
   }
 
-  onTaskDateChange(event: Date) {
-    if (event) {
-      this.filterDueDate = event.toISOString().split('T')[0]; // Преобразуем в строку "YYYY-MM-DD"
+  // 📅 Преобразуем дату в строку "YYYY-MM-DD"
+  onTaskDateChange(date: Date) {
+    if (date) {
+      this.newTask.dueDate = this.formatDate(date);
     }
+  }
+
+  // 🔄 Функция преобразования Date → "YYYY-MM-DD"
+  private formatDate(date: Date): string {
+    return date.toLocaleDateString('sv-SE'); // Берём только YYYY-MM-DD
   }
 
   onSave(): void {

@@ -11,8 +11,11 @@
     <input matInput [(ngModel)]="filterTitle" placeholder="Фильтр по названию" />
   </mat-form-field>
 
+
   <mat-form-field appearance="outline">
-    <input matInput type="date" [(ngModel)]="filterDueDate" placeholder="Фильтр по дате" />
+    <input matInput [matDatepicker]="picker" [(ngModel)]="filterDueDate" placeholder="Фильтр по дате" readonly />
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
@@ -22,10 +25,13 @@
       <mat-option value="completed">Выполненное</mat-option>
     </mat-select>
   </mat-form-field>
+  <div class="filter-buttons">
+    <button mat-raised-button color="accent" (click)="applyFilters()">Применить</button>
+    <button mat-button (click)="clearFilters()">Сбросить</button>
+  </div>
 
-  <button mat-raised-button color="accent" (click)="applyFilters()">Применить</button>
-  <button mat-button (click)="clearFilters()">Сбросить</button>
 </div>
+
 
 <!-- 🔥 Список задач -->
 <div class="task-grid">

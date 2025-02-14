@@ -12,11 +12,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {SignUpComponent} from './auth/signUp.component';
-import {SignInComponent} from './auth/signIn.component';
 import {JwtModule} from '@auth0/angular-jwt';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatDialogModule} from '@angular/material/dialog';
+import {TextFieldModule} from '@angular/cdk/text-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {provideNativeDateAdapter} from '@angular/material/core';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import {MatDialogModule} from '@angular/material/dialog';
           disallowedRoutes: ['localhost:8080/auth/sign-in/'], // замените на ваш маршрут
         },
     }),
+    FormsModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
@@ -38,12 +41,17 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSelectModule,
     MatCardModule,
     MatFormFieldModule,
-    MatDialogModule
+    MatDialogModule,
+    TextFieldModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor,multi:true},
   AuthService,
   TaskService,
-  provideAnimationsAsync()],
+  provideAnimationsAsync(),
+    provideNativeDateAdapter()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

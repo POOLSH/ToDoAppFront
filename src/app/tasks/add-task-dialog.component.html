@@ -6,15 +6,28 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
-      <textarea matInput [(ngModel)]="newTask.description" name="description" placeholder="Описание" required></textarea>
+  <textarea matInput
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="8"
+            cdkAutosizeMaxRows="20"
+            [(ngModel)]="newTask.description"
+            name="description"
+            placeholder="Описание"
+            required>
+  </textarea>
     </mat-form-field>
+
 
     <div class="form-row">
       <mat-form-field appearance="outline" class="half-width">
-        <input matInput type="date" [(ngModel)]="newTask.dueDate" name="dueDate" placeholder="Дата" required />
+        <input matInput [matDatepicker]="picker" [(ngModel)]="filterDueDate" (dateChange)="onTaskDateChange($event.value)" name="dueDate" placeholder="Дата" required />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="half-width">
+
+
+    <mat-form-field appearance="outline" class="half-width">
         <mat-select [(ngModel)]="newTask.status" name="status" placeholder="Статус" required>
           <mat-option value="pending">Невыполненное</mat-option>
           <mat-option value="completed">Выполненное</mat-option>

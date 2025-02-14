@@ -1,35 +1,29 @@
-<form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+
+<form [formGroup]="signInForm" (ngSubmit)="onSubmit()" class="sign-in-form">
   <h2>Вход</h2>
 
-  <div>
-    <label for="username">Имя пользователя:</label>
-    <input
-      type="text"
-      id="username"
-      formControlName="username"
-      required
-    />
-    <div *ngIf="signInForm.get('username')?.invalid && signInForm.get('username')?.touched">
-      <small *ngIf="signInForm.get('username')?.errors?.required">Имя пользователя обязательно.</small>
-    </div>
-  </div>
+  <mat-form-field appearance="outline" class="full-width">
+    <input matInput type="text" id="username" formControlName="username" placeholder="Имя пользователя" required />
+    <mat-error *ngIf="signInForm.get('username')?.errors?.['required'] && signInForm.get('username')?.touched">
+      Имя пользователя обязательно.
+    </mat-error>
+  </mat-form-field>
 
-  <div>
-    <label for="password">Пароль:</label>
-    <input
-      type="password"
-      id="password"
-      formControlName="password"
-      required
-    />
-    <div *ngIf="signInForm.get('password')?.invalid && signInForm.get('password')?.touched">
-      <small *ngIf="signInForm.get('password')?.errors?.required">Пароль обязателен.</small>
-      <small *ngIf="signInForm.get('password')?.errors?.minlength">Минимум 8 символов.</small>
-    </div>
-  </div>
+  <mat-form-field appearance="outline" class="full-width">
+    <input matInput type="password" id="password" formControlName="password" placeholder="Пароль" required />
+    <mat-error *ngIf="signInForm.get('password')?.errors?.['required'] && signInForm.get('password')?.touched">
+      Пароль обязателен.
+    </mat-error>
+    <mat-error *ngIf="signInForm.get('password')?.errors?.['minlength'] && signInForm.get('password')?.touched">
+      Минимум 8 символов.
+    </mat-error>
+  </mat-form-field>
+
+
+  <!-- Кнопки -->
   <div class="button-group">
-  <button type="submit" [disabled]="signInForm.invalid">Войти</button>
-
-  <button type="button" (click)="goToSignUp()">Регистрация</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="signInForm.invalid">Войти</button>
+    <button mat-stroked-button color="accent" type="button" (click)="goToSignUp()">Регистрация</button>
   </div>
 </form>
+
