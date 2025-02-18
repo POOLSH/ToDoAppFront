@@ -44,20 +44,8 @@ export class SignInComponent {
     if (this.signInForm.valid) {
       const { username, password } = this.signInForm.value;
       this.authService.signIn(username, password).subscribe(response => {
-        localStorage.setItem('jwtToken',response.token);
-        // Сохраните токен
-        this.authService.saveToken(response.token);
-
-        // Проверка аутентификации после входа
-        if (this.authService.isAuthenticated()) {
-          this.router.navigate(['/tasks']).then(success => {
-            if (success) {
-              console.log('Навигация успешна');
-            } else {
-              console.error('Навигация не удалась');
-            }
-          });
-        }
+        console.log('Вход успешен', response);
+        this.router.navigate(['/tasks']);
       }, error => {
         console.error('Ошибка при входе', error);
       });
@@ -65,4 +53,5 @@ export class SignInComponent {
       console.error('Форма содержит ошибки');
     }
   }
+
 }

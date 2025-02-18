@@ -45,10 +45,7 @@ export class SignUpComponent {
       const { username, email, password } = this.signUpForm.value;
       this.authService.signUp(username, email, password).subscribe(response => {
         console.log('Регистрация успешна', response);
-        if (response.token) {
-          this.authService.saveToken(response.token);
-        }
-        this.router.navigate(['/auth/sign-in']); // Перенаправление на страницу входа
+        this.router.navigate(['/auth/sign-in']);
       }, error => {
         console.error('Ошибка при регистрации', error);
       });
@@ -56,4 +53,5 @@ export class SignUpComponent {
       console.error('Форма содержит ошибки');
     }
   }
+
 }
